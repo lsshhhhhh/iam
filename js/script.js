@@ -109,8 +109,8 @@ document.addEventListener('DOMContentLoaded', () => {
             function initOrbs() {
                 const domOrbs = Array.from(document.querySelectorAll('.bg-orb'));
                 orbs = domOrbs.filter(el => window.getComputedStyle(el).display !== 'none').map(el => {
-                    let speedX = (Math.random() * 0.3 + 0.2) * (Math.random() > 0.5 ? 1 : -1);
-                    let speedY = (Math.random() * 0.3 + 0.2) * (Math.random() > 0.5 ? 1 : -1);
+                    let speedX = 2.0 * (Math.random() > 0.5 ? 1 : -1);
+                    let speedY = 2.0 * (Math.random() > 0.5 ? 1 : -1);
                     const width = el.offsetWidth, height = el.offsetHeight;
                     return {
                         el, width, height,
@@ -183,9 +183,15 @@ document.addEventListener('DOMContentLoaded', () => {
                         stamp.classList.add('wrong', 'show');
                     }
                 } 
-                // 4번 문제 (텍스트 오버레이 효과)
+                // 4번 문제 (O는 텍스트, X는 도장 효과)
                 else if (qNum === 4) {
-                    document.getElementById('text-4').classList.add('show');
+                    if (isCorrect) {
+                        document.getElementById('text-4').classList.add('show');
+                    } else {
+                        const stamp = document.getElementById('stamp-4');
+                        stamp.textContent = 'X';
+                        stamp.classList.add('wrong', 'show');
+                    }
                 }
 
                 // 진행률 바 업데이트

@@ -269,8 +269,10 @@
             max-height: 72vh;
             padding: 0;
             overflow-y: auto;
-            scrollbar-gutter: stable;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
         }
+        .life-timeline::-webkit-scrollbar { display: none; }
         .timeline-heading {
             margin-bottom: 32px;
         }
