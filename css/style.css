@@ -386,7 +386,7 @@
         .info-row {
             display: flex;
             align-items: center;
-            font-size: 1.15rem;
+            font-size: 1rem;
         }
         .info-label {
             width: 130px;
@@ -449,7 +449,7 @@
             position: absolute;
             bottom: 0;
             right: 5%;
-            width: 85%;
+            width: 78%;
             display: grid;
             grid-template-columns: repeat(2, minmax(0, 1fr));
             align-items: end;
@@ -460,7 +460,7 @@
             display: block;
             width: 100%;
             height: auto;
-            max-height: 42vh;
+            max-height: 38vh;
             object-fit: contain;
         }
 
@@ -480,7 +480,7 @@
                 position: relative; 
                 margin: 40px auto 0; 
                 right: auto;
-                width: 100%;
+                width: 90%;
             }
             .quote-box { margin-top: 0; text-align: center; }
 }
