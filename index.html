@@ -4,18 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        html.theme-loading body { visibility: hidden; }
-        html.theme-preload-dark { background-color: #111827; }
+        html { background-color: #fff; color-scheme: light; }
+        html.dark-mode { background-color: #111827; color-scheme: dark; }
     </style>
     <script>
         (() => {
-            document.documentElement.classList.add('theme-loading');
             try {
                 const tabTheme = window.name.startsWith('ssafy_theme:') ? window.name.split(':')[1] : null;
                 const theme = localStorage.getItem('ssafy_theme') || tabTheme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-                if (theme === 'dark') document.documentElement.classList.add('theme-preload-dark');
+                if (theme === 'dark') {
+                    document.documentElement.classList.add('dark-mode');
+                    const observer = new MutationObserver(() => {
+                        if (document.body) {
+                            document.body.classList.add('dark-mode');
+                            observer.disconnect();
+                        }
+                    });
+                    observer.observe(document.documentElement, { childList: true });
+                }
             } catch (_) {}
-            setTimeout(() => document.documentElement.classList.remove('theme-loading'), 1500);
         })();
     </script>
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">

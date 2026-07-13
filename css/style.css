@@ -424,6 +424,30 @@
 /* === ABOUT SPLIT LAYOUT END === */
 
 /* === LIGHT / DARK THEME === */
+@media (pointer: fine) {
+    html,
+    body,
+    body * {
+        cursor: none !important;
+    }
+
+    .custom-cursor {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 2147483647;
+        width: 34px;
+        height: 48px;
+        object-fit: contain;
+        pointer-events: none;
+        opacity: 0;
+        transform: translate(-4px, -4px);
+        transition: opacity 0.12s ease;
+    }
+
+    .custom-cursor.is-visible { opacity: 1; }
+}
+
 body,
 .navbar,
 .gradient-bg,

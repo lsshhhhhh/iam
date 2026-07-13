@@ -1,4 +1,31 @@
 document.addEventListener('DOMContentLoaded', () => {
+            // --- 0. 이미지 커서 ---
+            if (window.matchMedia('(pointer: fine)').matches) {
+                const customCursor = document.createElement('img');
+                customCursor.className = 'custom-cursor';
+                customCursor.src = 'cursor/normal.jpg';
+                customCursor.alt = '';
+                customCursor.setAttribute('aria-hidden', 'true');
+                document.body.appendChild(customCursor);
+
+                const clickableSelector = 'a, button, [onclick], input, select, textarea, label, summary, [role="button"]';
+
+                document.addEventListener('pointermove', (event) => {
+                    customCursor.style.left = `${event.clientX}px`;
+                    customCursor.style.top = `${event.clientY}px`;
+                    customCursor.classList.add('is-visible');
+                });
+
+                document.addEventListener('pointerover', (event) => {
+                    const isClickable = event.target.closest?.(clickableSelector);
+                    customCursor.src = isClickable ? 'cursor/clickable.jpg' : 'cursor/normal.jpg';
+                });
+
+                document.documentElement.addEventListener('mouseleave', () => {
+                    customCursor.classList.remove('is-visible');
+                });
+            }
+
             // --- 1. 라이트/다크 모드 ---
             const themeButton = document.querySelector('.theme-toggle');
             const tabTheme = window.name.startsWith('ssafy_theme:') ? window.name.split(':')[1] : null;
@@ -7,6 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const applyTheme = (theme) => {
                 const isDark = theme === 'dark';
+                document.documentElement.classList.toggle('dark-mode', isDark);
                 document.body.classList.toggle('dark-mode', isDark);
                 const icon = themeButton?.querySelector('.theme-icon');
                 if (icon) icon.textContent = isDark ? '☀️' : '🌙';
@@ -14,10 +42,9 @@ document.addEventListener('DOMContentLoaded', () => {
             };
 
             applyTheme(savedTheme || (prefersDark ? 'dark' : 'light'));
-            document.documentElement.classList.remove('theme-loading', 'theme-preload-dark');
 
             themeButton?.addEventListener('click', () => {
-                const nextTheme = document.body.classList.contains('dark-mode') ? 'light' : 'dark';
+                const nextTheme = document.documentElement.classList.contains('dark-mode') ? 'light' : 'dark';
                 localStorage.setItem('ssafy_theme', nextTheme);
                 window.name = `ssafy_theme:${nextTheme}`;
                 applyTheme(nextTheme);
