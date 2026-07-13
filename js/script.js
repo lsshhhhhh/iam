@@ -1,7 +1,32 @@
 document.addEventListener('DOMContentLoaded', () => {
+            // --- 1. 라이트/다크 모드 ---
+            const themeButton = document.querySelector('.theme-toggle');
+            const tabTheme = window.name.startsWith('ssafy_theme:') ? window.name.split(':')[1] : null;
+            const savedTheme = localStorage.getItem('ssafy_theme') || tabTheme;
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+            const applyTheme = (theme) => {
+                const isDark = theme === 'dark';
+                document.body.classList.toggle('dark-mode', isDark);
+                const icon = themeButton?.querySelector('.theme-icon');
+                if (icon) icon.textContent = isDark ? '☀️' : '🌙';
+                themeButton?.setAttribute('aria-label', isDark ? '라이트 모드로 전환' : '다크 모드로 전환');
+            };
+
+            applyTheme(savedTheme || (prefersDark ? 'dark' : 'light'));
+            document.documentElement.classList.remove('theme-loading', 'theme-preload-dark');
+
+            themeButton?.addEventListener('click', () => {
+                const nextTheme = document.body.classList.contains('dark-mode') ? 'light' : 'dark';
+                localStorage.setItem('ssafy_theme', nextTheme);
+                window.name = `ssafy_theme:${nextTheme}`;
+                applyTheme(nextTheme);
+            });
+
             // --- 2. 모바일 햄버거 메뉴 토글 ---
-            document.querySelector('.hamburger')?.addEventListener('click', () => {
-                document.querySelector('.nav-links')?.classList.toggle('open');
+            document.querySelector('.hamburger')?.addEventListener('click', (event) => {
+                const isOpen = document.querySelector('.nav-links')?.classList.toggle('open') ?? false;
+                event.currentTarget.setAttribute('aria-expanded', String(isOpen));
             });
 
             // --- 3. 스크롤 페이드인 옵저버 ---

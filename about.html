@@ -3,30 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        html.theme-loading body { visibility: hidden; }
+        html.theme-preload-dark { background-color: #111827; }
+    </style>
+    <script>
+        (() => {
+            document.documentElement.classList.add('theme-loading');
+            try {
+                const tabTheme = window.name.startsWith('ssafy_theme:') ? window.name.split(':')[1] : null;
+                const theme = localStorage.getItem('ssafy_theme') || tabTheme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+                if (theme === 'dark') document.documentElement.classList.add('theme-preload-dark');
+            } catch (_) {}
+            setTimeout(() => document.documentElement.classList.remove('theme-loading'), 1500);
+        })();
+    </script>
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
     <title>이송하란?</title>
 </head>
-<body>
-<nav class="navbar">
-        <a href="index.html" class="nav-brand">이송하</a>
-        <ul class="nav-links">
-            <li><a href="index.html">홈</a></li>
-            <li><a class="active" href="about.html">이송하란?</a></li>
-            <li><a href="balance.html">밸런스게임</a></li>
-        </ul>
-        <div class="hamburger">
-            <span></span><span></span><span></span>
+<body class="overflow-x-hidden pt-[70px] font-sans text-[#2d3436]">
+<nav class="navbar fixed left-0 top-0 z-[1000] flex h-[70px] w-full items-center justify-between border-b border-purple-200/30 bg-white/90 px-10 backdrop-blur-md max-md:px-5">
+        <div class="flex items-center gap-3">
+            <a href="index.html" class="nav-brand text-2xl font-extrabold text-[#9b59b6] no-underline">이송하</a>
+            <button type="button" class="theme-toggle flex h-9 w-9 items-center justify-center rounded-full border border-purple-200 bg-white text-lg shadow-sm transition hover:scale-105 hover:bg-purple-50" aria-label="다크 모드로 전환" title="테마 전환">
+                <span class="theme-icon" aria-hidden="true">🌙</span>
+            </button>
         </div>
+        <ul class="nav-links flex list-none gap-8 max-md:absolute max-md:left-0 max-md:top-[70px] max-md:hidden max-md:w-full max-md:flex-col max-md:gap-0 max-md:bg-white/95 max-md:text-center">
+            <li><a class="relative text-lg font-semibold text-[#2d3436] transition-colors hover:text-[#9b59b6]" href="index.html">홈</a></li>
+            <li><a class="active relative text-lg font-semibold text-[#9b59b6]" aria-current="page" href="about.html">이송하란?</a></li>
+            <li><a class="relative text-lg font-semibold text-[#2d3436] transition-colors hover:text-[#9b59b6]" href="balance.html">밸런스게임</a></li>
+        </ul>
+        <button type="button" class="hamburger hidden flex-col gap-[5px] max-md:flex" aria-label="메뉴 열기" aria-expanded="false">
+            <span class="h-[3px] w-[25px] rounded bg-[#2d3436]"></span><span class="h-[3px] w-[25px] rounded bg-[#2d3436]"></span><span class="h-[3px] w-[25px] rounded bg-[#2d3436]"></span>
+        </button>
     </nav>
 <div class="floating-bg">
         <span class="bg-orb orb-1"></span><span class="bg-orb orb-2"></span>
         <span class="bg-orb orb-3"></span><span class="bg-orb orb-4"></span>
     </div>
 <main id="about-page" class="page">
-        <div class="about-split fade-in">
+        <div class="about-split fade-in flex min-h-[calc(100vh-70px)] w-full max-md:flex-col">
             <!-- 왼쪽 정보 영역 -->
-            <div class="about-left">
+            <div class="about-left relative flex flex-[0.85] flex-col justify-center bg-[#fafafc]/[0.85] py-[100px] pl-[10%] pr-[5%] max-md:px-5 max-md:py-14">
                 <!-- 사각형 장식 -->
                 <div class="deco-square deco-coral"></div>
                 <div class="deco-square deco-purple"></div>
@@ -38,24 +59,24 @@
                         <p>나의 걸어온 길, 그리고 앞으로의 여정</p>
                     </div>
                     <div class="timeline-list">
-                        <article class="timeline-entry"><time>2001.03.27</time><div><h2>세상에 나옴</h2></div></article>
-                        <article class="timeline-entry"><time>2005</time><div><h2>어린이집 입학</h2></div></article>
-                        <article class="timeline-entry"><time>2008</time><div><h2>동북초등학교 입학</h2></div></article>
-                        <article class="timeline-entry"><time>2014</time><div><h2>선덕중학교 입학</h2></div></article>
-                        <article class="timeline-entry"><time>2017</time><div><h2>선덕고등학교 입학</h2></div></article>
-                        <article class="timeline-entry"><time>2020</time><div><h2>재수</h2></div></article>
-                        <article class="timeline-entry"><time>2021</time><div><h2>서경대학교 입학</h2></div></article>
-                        <article class="timeline-entry"><time>2023</time><div><h2>국민대학교 편입학</h2></div></article>
-                        <article class="timeline-entry"><time>2023.09.11</time><div><h2>입대</h2></div></article>
-                        <article class="timeline-entry"><time>2025.03.10</time><div><h2>전역</h2></div></article>
-                        <article class="timeline-entry timeline-current"><time>2026.06</time><div><h2>SSAFY 여정 시작</h2></div></article>
-                        <article class="timeline-entry timeline-future"><time>2026.08 (예정)</time><div><h2>졸업</h2></div></article>
+                        <article class="timeline-entry timeline-left"><time>2001.03.27</time><div><h2>세상에 나옴</h2></div></article>
+                        <article class="timeline-entry timeline-right"><time>2005</time><div><h2>어린이집 입학</h2></div></article>
+                        <article class="timeline-entry timeline-left"><time>2008</time><div><h2>동북초등학교 입학</h2></div></article>
+                        <article class="timeline-entry timeline-right"><time>2014</time><div><h2>선덕중학교 입학</h2></div></article>
+                        <article class="timeline-entry timeline-left"><time>2017</time><div><h2>선덕고등학교 입학</h2></div></article>
+                        <article class="timeline-entry timeline-right"><time>2020</time><div><h2>재수</h2></div></article>
+                        <article class="timeline-entry timeline-left"><time>2021</time><div><h2>서경대학교 입학</h2></div></article>
+                        <article class="timeline-entry timeline-left"><time>2023</time><div><h2>국민대학교 편입학</h2></div></article>
+                        <article class="timeline-entry timeline-right"><time>2023.09.11</time><div><h2>입대</h2></div></article>
+                        <article class="timeline-entry timeline-right"><time>2025.03.10</time><div><h2>전역</h2></div></article>
+                        <article class="timeline-entry timeline-current timeline-left"><time>2026.06</time><div><h2>SSAFY 여정 시작</h2></div></article>
+                        <article class="timeline-entry timeline-future timeline-right"><time>2026.08 (예정)</time><div><h2>졸업</h2></div></article>
                     </div>
                 </section>
             </div>
 
             <!-- 오른쪽 자기소개 및 사진 영역 -->
-            <div class="about-right">
+            <div class="about-right relative flex flex-[1.15] flex-col justify-start overflow-hidden bg-[#f3eadf]/[0.85] px-[4%] py-20 max-md:min-h-[400px] max-md:px-5 max-md:py-14">
                 <div class="about-info-list">
                     <div class="info-row">
                         <span class="info-label">이름</span>

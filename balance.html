@@ -3,30 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        html.theme-loading body { visibility: hidden; }
+        html.theme-preload-dark { background-color: #111827; }
+    </style>
+    <script>
+        (() => {
+            document.documentElement.classList.add('theme-loading');
+            try {
+                const tabTheme = window.name.startsWith('ssafy_theme:') ? window.name.split(':')[1] : null;
+                const theme = localStorage.getItem('ssafy_theme') || tabTheme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+                if (theme === 'dark') document.documentElement.classList.add('theme-preload-dark');
+            } catch (_) {}
+            setTimeout(() => document.documentElement.classList.remove('theme-loading'), 1500);
+        })();
+    </script>
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
     <title>밸런스 게임</title>
 </head>
-<body>
-<nav class="navbar">
-        <a href="index.html" class="nav-brand">이송하</a>
-        <ul class="nav-links">
-            <li><a href="index.html">홈</a></li>
-            <li><a href="about.html">이송하란?</a></li>
-            <li><a class="active" href="balance.html">밸런스게임</a></li>
-        </ul>
-        <div class="hamburger">
-            <span></span><span></span><span></span>
+<body class="overflow-x-hidden pt-[70px] font-sans text-[#2d3436]">
+<nav class="navbar fixed left-0 top-0 z-[1000] flex h-[70px] w-full items-center justify-between border-b border-purple-200/30 bg-white/90 px-10 backdrop-blur-md max-md:px-5">
+        <div class="flex items-center gap-3">
+            <a href="index.html" class="nav-brand text-2xl font-extrabold text-[#9b59b6] no-underline">이송하</a>
+            <button type="button" class="theme-toggle flex h-9 w-9 items-center justify-center rounded-full border border-purple-200 bg-white text-lg shadow-sm transition hover:scale-105 hover:bg-purple-50" aria-label="다크 모드로 전환" title="테마 전환">
+                <span class="theme-icon" aria-hidden="true">🌙</span>
+            </button>
         </div>
+        <ul class="nav-links flex list-none gap-8 max-md:absolute max-md:left-0 max-md:top-[70px] max-md:hidden max-md:w-full max-md:flex-col max-md:gap-0 max-md:bg-white/95 max-md:text-center">
+            <li><a class="relative text-lg font-semibold text-[#2d3436] transition-colors hover:text-[#9b59b6]" href="index.html">홈</a></li>
+            <li><a class="relative text-lg font-semibold text-[#2d3436] transition-colors hover:text-[#9b59b6]" href="about.html">이송하란?</a></li>
+            <li><a class="active relative text-lg font-semibold text-[#9b59b6]" aria-current="page" href="balance.html">밸런스게임</a></li>
+        </ul>
+        <button type="button" class="hamburger hidden flex-col gap-[5px] max-md:flex" aria-label="메뉴 열기" aria-expanded="false">
+            <span class="h-[3px] w-[25px] rounded bg-[#2d3436]"></span><span class="h-[3px] w-[25px] rounded bg-[#2d3436]"></span><span class="h-[3px] w-[25px] rounded bg-[#2d3436]"></span>
+        </button>
     </nav>
 <div class="floating-bg">
         <span class="bg-orb orb-1"></span><span class="bg-orb orb-2"></span>
         <span class="bg-orb orb-3"></span><span class="bg-orb orb-4"></span>
     </div>
 <main id="balance-page" class="page gradient-bg">
-        <section>
-            <div class="container">
-                <h2 class="section-title" style="margin-bottom: 40px;">페어 궁합 밸런스 게임 🎮</h2>
+        <section class="py-24">
+            <div class="container mx-auto max-w-[1000px] px-6">
+                <h2 class="section-title mb-10">페어 궁합 밸런스 게임 🎮</h2>
                 
                 <!-- 게이미피케이션 대시보드 -->
                 <div class="balance-dashboard fade-in">
@@ -42,20 +63,20 @@
                         <div class="stat-box">
                             <div class="stat-label">현재 내 포인트</div>
                             <div class="stat-value" id="current-score">0 점</div>
-                            <div class="stat-label" style="margin-top:5px;">획득 뱃지: <span id="current-badge">게임 중...</span></div>
+                            <div class="stat-label mt-[5px]">획득 뱃지: <span id="current-badge">게임 중...</span></div>
                         </div>
                         <div class="stat-box">
                             <div class="stat-label">나의 최고 기록</div>
                             <div class="stat-value best-record" id="best-score">기록 없음</div>
-                            <div class="stat-label" style="margin-top:5px;">최고 뱃지: <span class="best-record" id="best-badge">-</span></div>
+                            <div class="stat-label mt-[5px]">최고 뱃지: <span class="best-record" id="best-badge">-</span></div>
                         </div>
                     </div>
                 </div>
 
                 <!-- 밸런스 게임 카드 그리드 -->
-                <div class="balance-grid">
+                <div class="balance-grid mx-auto grid max-w-[900px] grid-cols-2 gap-6 max-md:grid-cols-1">
                     <!-- Q1 -->
-                    <div class="b-card fade-in" style="transition-delay: 0.1s;">
+                    <div class="b-card fade-in [transition-delay:100ms]">
                         <div class="b-question">Q1. 탕수육</div>
                         <div class="b-options">
                             <button class="btn-option" onclick="handleAnswer(1, false)">부먹</button>
@@ -64,7 +85,7 @@
                         <div class="stamp-overlay"><span class="stamp-mark" id="stamp-1"></span></div>
                     </div>
                     <!-- Q2 -->
-                    <div class="b-card fade-in" style="transition-delay: 0.2s;">
+                    <div class="b-card fade-in [transition-delay:200ms]">
                         <div class="b-question">Q2. 라면 취향</div>
                         <div class="b-options">
                             <button class="btn-option" onclick="handleAnswer(2, false)">진순</button>
@@ -73,7 +94,7 @@
                         <div class="stamp-overlay"><span class="stamp-mark" id="stamp-2"></span></div>
                     </div>
                     <!-- Q3 -->
-                    <div class="b-card fade-in" style="transition-delay: 0.3s;">
+                    <div class="b-card fade-in [transition-delay:300ms]">
                         <div class="b-question">Q3. 출생 연도</div>
                         <div class="b-options">
                             <button class="btn-option" onclick="handleAnswer(3, false)">99</button>
@@ -84,7 +105,7 @@
                         <div class="stamp-overlay"><span class="stamp-mark" id="stamp-3"></span></div>
                     </div>
                     <!-- Q4 (오버레이 적용) -->
-                    <div class="b-card fade-in" style="transition-delay: 0.4s;">
+                    <div class="b-card fade-in [transition-delay:400ms]">
                         <div class="b-question">Q4. 연애 상태</div>
                         <div class="b-options">
                             <button class="btn-option" onclick="handleAnswer(4, null)">연애 중</button>
