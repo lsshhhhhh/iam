@@ -26,6 +26,41 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             }
 
+            // --- 랜딩페이지 스크롤 진행률 (0 ~ 1) ---
+            if (document.getElementById('home-page')) {
+                const navbar = document.querySelector('.navbar');
+                const progressBar = document.createElement('div');
+                progressBar.className = 'scroll-progress';
+                progressBar.setAttribute('role', 'progressbar');
+                progressBar.setAttribute('aria-label', '페이지 스크롤 진행률');
+                progressBar.setAttribute('aria-valuemin', '0');
+                progressBar.setAttribute('aria-valuemax', '1');
+                progressBar.setAttribute('aria-valuenow', '0');
+                navbar?.appendChild(progressBar);
+
+                let progressFrameId;
+                const updateScrollProgress = () => {
+                    const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
+                    const progress = scrollableHeight > 0
+                        ? Math.min(1, Math.max(0, window.scrollY / scrollableHeight))
+                        : 0;
+
+                    progressBar.style.transform = `scaleX(${progress})`;
+                    progressBar.setAttribute('aria-valuenow', progress.toFixed(3));
+                    progressFrameId = undefined;
+                };
+
+                const requestProgressUpdate = () => {
+                    if (progressFrameId === undefined) {
+                        progressFrameId = requestAnimationFrame(updateScrollProgress);
+                    }
+                };
+
+                window.addEventListener('scroll', requestProgressUpdate, { passive: true });
+                window.addEventListener('resize', requestProgressUpdate);
+                updateScrollProgress();
+            }
+
             // --- 1. 라이트/다크 모드 ---
             const themeButton = document.querySelector('.theme-toggle');
             const tabTheme = window.name.startsWith('ssafy_theme:') ? window.name.split(':')[1] : null;

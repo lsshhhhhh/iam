@@ -61,6 +61,20 @@
         .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
         .hamburger span { width: 25px; height: 3px; background-color: var(--text-dark); border-radius: 3px; transition: all 0.3s; }
 
+        .scroll-progress {
+            position: absolute;
+            right: 0;
+            bottom: -1px;
+            left: 0;
+            height: 4px;
+            border-radius: 0 999px 999px 0;
+            background: linear-gradient(90deg, #a2d2ff, #a8e6cf, #c3b1e1);
+            box-shadow: 0 0 8px rgba(116, 185, 255, 0.45);
+            transform: scaleX(0);
+            transform-origin: left center;
+            will-change: transform;
+        }
+
         /* --- 페이지 라우팅 처리용 (SPA) --- */
         .page { display: block; min-height: calc(100vh - var(--nav-height)); position: relative; z-index: 1; animation: fadeInPage 0.4s ease forwards;}
         .page.active { display: block; }
@@ -441,7 +455,7 @@
         object-fit: contain;
         pointer-events: none;
         opacity: 0;
-        transform: translate(-4px, -4px);
+        transform: translate(-50%, -50%);
         transition: opacity 0.12s ease;
     }
 
