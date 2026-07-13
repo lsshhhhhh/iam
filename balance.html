@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <title>밸런스 게임</title>
+</head>
+<body>
+<nav class="navbar">
+        <a href="index.html" class="nav-brand">이송하</a>
+        <ul class="nav-links">
+            <li><a href="index.html">홈</a></li>
+            <li><a href="about.html">이송하란?</a></li>
+            <li><a class="active" href="balance.html">밸런스게임</a></li>
+        </ul>
+        <div class="hamburger">
+            <span></span><span></span><span></span>
+        </div>
+    </nav>
+<div class="floating-bg">
+        <span class="bg-orb orb-1"></span><span class="bg-orb orb-2"></span>
+        <span class="bg-orb orb-3"></span><span class="bg-orb orb-4"></span>
+    </div>
+<main id="balance-page" class="page gradient-bg">
+        <section>
+            <div class="container">
+                <h2 class="section-title" style="margin-bottom: 40px;">페어 궁합 밸런스 게임 🎮</h2>
+                
+                <!-- 게이미피케이션 대시보드 -->
+                <div class="balance-dashboard fade-in">
+                    <div class="dashboard-header">
+                        <div class="progress-container">
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar-fill" id="progress-fill"></div>
+                            </div>
+                        </div>
+                        <div class="progress-text" id="progress-text">0 / 4 완료</div>
+                    </div>
+                    <div class="stats-grid">
+                        <div class="stat-box">
+                            <div class="stat-label">현재 내 포인트</div>
+                            <div class="stat-value" id="current-score">0 점</div>
+                            <div class="stat-label" style="margin-top:5px;">획득 뱃지: <span id="current-badge">게임 중...</span></div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">나의 최고 기록</div>
+                            <div class="stat-value best-record" id="best-score">기록 없음</div>
+                            <div class="stat-label" style="margin-top:5px;">최고 뱃지: <span class="best-record" id="best-badge">-</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 밸런스 게임 카드 그리드 -->
+                <div class="balance-grid">
+                    <!-- Q1 -->
+                    <div class="b-card fade-in" style="transition-delay: 0.1s;">
+                        <div class="b-question">Q1. 탕수육</div>
+                        <div class="b-options">
+                            <button class="btn-option" onclick="handleAnswer(1, false)">부먹</button>
+                            <button class="btn-option" onclick="handleAnswer(1, true)">찍먹</button>
+                        </div>
+                        <div class="stamp-overlay"><span class="stamp-mark" id="stamp-1"></span></div>
+                    </div>
+                    <!-- Q2 -->
+                    <div class="b-card fade-in" style="transition-delay: 0.2s;">
+                        <div class="b-question">Q2. 라면 취향</div>
+                        <div class="b-options">
+                            <button class="btn-option" onclick="handleAnswer(2, false)">진순</button>
+                            <button class="btn-option" onclick="handleAnswer(2, true)">불닭</button>
+                        </div>
+                        <div class="stamp-overlay"><span class="stamp-mark" id="stamp-2"></span></div>
+                    </div>
+                    <!-- Q3 -->
+                    <div class="b-card fade-in" style="transition-delay: 0.3s;">
+                        <div class="b-question">Q3. 출생 연도</div>
+                        <div class="b-options">
+                            <button class="btn-option" onclick="handleAnswer(3, false)">99</button>
+                            <button class="btn-option" onclick="handleAnswer(3, false)">00</button>
+                            <button class="btn-option" onclick="handleAnswer(3, true)">01</button>
+                            <button class="btn-option" onclick="handleAnswer(3, false)">02</button>
+                        </div>
+                        <div class="stamp-overlay"><span class="stamp-mark" id="stamp-3"></span></div>
+                    </div>
+                    <!-- Q4 (오버레이 적용) -->
+                    <div class="b-card fade-in" style="transition-delay: 0.4s;">
+                        <div class="b-question">Q4. 연애 상태</div>
+                        <div class="b-options">
+                            <button class="btn-option" onclick="handleAnswer(4, null)">연애 중</button>
+                            <button class="btn-option" onclick="handleAnswer(4, null)">미연애</button>
+                        </div>
+                        <div class="text-overlay" id="text-4">놀랍나요?</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+<footer>
+        <div class="container">
+            <p>© 2026 SSAFY Java Class. Created by 이송하. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="js/script.js"></script>
+</body>
+</html>
