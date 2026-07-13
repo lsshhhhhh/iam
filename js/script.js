@@ -85,6 +85,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 applyTheme(nextTheme);
             });
 
+            // --- Contact 팝업 ---
+            const contactDialog = document.getElementById('contact-dialog');
+            document.getElementById('contact-open')?.addEventListener('click', () => contactDialog?.showModal());
+            document.getElementById('contact-close')?.addEventListener('click', () => contactDialog?.close());
+            contactDialog?.addEventListener('click', (event) => {
+                if (event.target === contactDialog) contactDialog.close();
+            });
+
             // --- 2. 모바일 햄버거 메뉴 토글 ---
             document.querySelector('.hamburger')?.addEventListener('click', (event) => {
                 const isOpen = document.querySelector('.nav-links')?.classList.toggle('open') ?? false;

@@ -186,6 +186,43 @@
         }
         .text-overlay.show { opacity: 1; }
 
+        .contact-area { display: flex; flex-direction: column; align-items: center; gap: 14px; margin-top: 48px; text-align: center; }
+        .contact-button,
+        .contact-close {
+            border: none;
+            border-radius: 999px;
+            background-color: #9b59b6;
+            color: #fff;
+            font-weight: 700;
+            padding: 14px 34px;
+            transition: transform 0.2s ease, background-color 0.2s ease;
+        }
+        .contact-button:hover,
+        .contact-close:hover { background-color: #8e44ad; transform: translateY(-2px); }
+        .portfolio-link {
+            color: #9b59b6;
+            font-weight: 700;
+            text-decoration: none;
+            transition: color 0.2s ease, transform 0.2s ease;
+        }
+        .portfolio-link:hover { color: #8e44ad; text-decoration: underline; transform: translateY(-1px); }
+        .contact-dialog {
+            width: min(90vw, 420px);
+            margin: auto;
+            border: 0;
+            border-radius: 24px;
+            background: #fff;
+            color: var(--text-dark);
+            box-shadow: 0 24px 70px rgba(0, 0, 0, 0.25);
+        }
+        .contact-dialog::backdrop { background: rgba(17, 24, 39, 0.58); backdrop-filter: blur(4px); }
+        .contact-dialog-content { padding: 36px; text-align: center; }
+        .contact-dialog h2 { margin-bottom: 24px; color: #9b59b6; font-size: 1.8rem; font-weight: 800; }
+        .contact-dialog p { display: flex; justify-content: space-between; gap: 20px; margin-bottom: 16px; }
+        .contact-dialog a { color: #636e72; text-decoration: none; }
+        .contact-dialog a:hover { color: #9b59b6; text-decoration: underline; }
+        .contact-close { margin-top: 18px; padding: 10px 28px; }
+
         /* --- 푸터 --- */
         footer { background-color: rgba(255, 255, 255, 0.85); text-align: center; padding: 40px 0; color: #b2bec3; font-size: 0.9rem; border-top: 1px solid rgba(241, 242, 246, 0.5); position: relative; z-index: 1; }
         .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
@@ -355,6 +392,10 @@
             width: 130px;
             font-weight: 800;
             color: #34495e;
+        }
+        .info-nickname {
+            font-size: 0.72rem;
+            font-weight: 600;
         }
         .info-value {
             color: var(--text-muted);
@@ -549,6 +590,11 @@ body.dark-mode .btn-option:hover {
 }
 
 body.dark-mode .progress-bar-bg { background-color: #374151; }
+body.dark-mode .portfolio-link { color: #c4b5fd; }
+body.dark-mode .portfolio-link:hover { color: #ddd6fe; }
+body.dark-mode .contact-dialog { color: #e5e7eb; background-color: #1f2937; }
+body.dark-mode .contact-dialog a { color: #cbd5e1; }
+body.dark-mode .contact-dialog a:hover { color: #c4b5fd; }
 body.dark-mode .about-left { background-color: rgba(17, 24, 39, 0.94); }
 body.dark-mode .about-right { background-color: rgba(31, 41, 55, 0.94); }
 body.dark-mode .info-label { color: #e5e7eb; }
