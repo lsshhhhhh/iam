@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        html { background-color: #fff; color-scheme: light; }
+        html.dark-mode { background-color: #111827; color-scheme: dark; }
+    </style>
+    <script>
+        (() => {
+            try {
+                const tabTheme = window.name.startsWith('ssafy_theme:') ? window.name.split(':')[1] : null;
+                const theme = localStorage.getItem('ssafy_theme') || tabTheme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+                if (theme === 'dark') {
+                    document.documentElement.classList.add('dark-mode');
+                    const observer = new MutationObserver(() => {
+                        if (document.body) {
+                            document.body.classList.add('dark-mode');
+                            observer.disconnect();
+                        }
+                    });
+                    observer.observe(document.documentElement, { childList: true });
+                }
+            } catch (_) {}
+        })();
+    </script>
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>좋아하는 것들</title>
+</head>
+<body class="overflow-x-hidden pt-[70px] font-sans text-[#2d3436]">
+    <nav class="navbar fixed left-0 top-0 z-[1000] flex h-[70px] w-full items-center justify-between border-b border-purple-200/30 bg-white/90 px-10 backdrop-blur-md max-md:px-5">
+        <div class="flex items-center gap-3">
+            <a href="index.html" class="nav-brand text-2xl font-extrabold text-[#9b59b6] no-underline">이송하</a>
+            <button type="button" class="theme-toggle flex h-9 w-9 items-center justify-center rounded-full border border-purple-200 bg-white text-lg shadow-sm transition hover:scale-105 hover:bg-purple-50" aria-label="다크 모드로 전환" title="테마 전환">
+                <span class="theme-icon" aria-hidden="true">🌙</span>
+            </button>
+        </div>
+        <ul class="nav-links flex list-none gap-8 max-md:absolute max-md:left-0 max-md:top-[70px] max-md:hidden max-md:w-full max-md:flex-col max-md:gap-0 max-md:bg-white/95 max-md:text-center">
+            <li><a class="relative text-lg font-semibold text-[#2d3436] transition-colors hover:text-[#9b59b6]" href="index.html">홈</a></li>
+            <li><a class="relative text-lg font-semibold text-[#2d3436] transition-colors hover:text-[#9b59b6]" href="about.html">이송하란?</a></li>
+            <li><a class="active relative text-lg font-semibold text-[#9b59b6]" aria-current="page" href="likes.html">좋아하는 것들</a></li>
+            <li><a class="relative text-lg font-semibold text-[#2d3436] transition-colors hover:text-[#9b59b6]" href="balance.html">밸런스게임</a></li>
+        </ul>
+        <button type="button" class="hamburger hidden flex-col gap-[5px] max-md:flex" aria-label="메뉴 열기" aria-expanded="false">
+            <span class="h-[3px] w-[25px] rounded bg-[#2d3436]"></span><span class="h-[3px] w-[25px] rounded bg-[#2d3436]"></span><span class="h-[3px] w-[25px] rounded bg-[#2d3436]"></span>
+        </button>
+    </nav>
+
+    <div class="floating-bg">
+        <span class="bg-orb orb-1"></span><span class="bg-orb orb-2"></span>
+        <span class="bg-orb orb-3"></span><span class="bg-orb orb-4"></span>
+    </div>
+
+    <main id="likes-page" class="page gradient-bg">
+        <section class="likes-section">
+            <div class="container likes-container fade-in">
+                <header class="likes-heading">
+                    <p>MY FAVORITES</p>
+                    <h1>좋아하는 것들</h1>
+                </header>
+
+                <div class="mind-map">
+                    <div class="mind-center">좋아하는 것들</div>
+
+                    <article class="mind-branch music-branch">
+                        <h2>🎵 노래</h2>
+                        <ul>
+                            <li><strong>MRCH</strong><span>아직은 낭만 · Color it · 항복</span></li>
+                            <li><strong>체리필터</strong><span>Happy Day · 낭만 고양이</span></li>
+                            <li><strong>마크툽</strong><span>시작의 아이</span></li>
+                            <li><strong>찬민</strong><span>Wave</span></li>
+                            <li><strong>빅뱅</strong></li>
+                            <li><strong>위수</strong><span>Me Before You</span></li>
+                            <li><strong>정우</strong><span>Ding! · 철의 삶</span></li>
+                            <li><strong>하이키</strong><span>Summer Was You</span></li>
+                        </ul>
+                    </article>
+
+                    <article class="mind-branch game-branch">
+                        <h2>🎮 게임</h2>
+                        <ul>
+                            <li><strong>리그 오브 레전드</strong><span>마스터 이 · 비에고 · 애쉬 · 벨베스 · 신 짜오</span></li>
+                            <li><strong>카트라이더</strong></li>
+                            <li><strong>메이플스토리</strong></li>
+                        </ul>
+                    </article>
+
+                    <article class="mind-branch food-branch">
+                        <h2>🍽️ 음식</h2>
+                        <ul class="food-list">
+                            <li>치킨</li><li>맥주</li><li>위스키</li><li>나쵸</li>
+                            <li>타코</li><li>타코야끼</li><li>깻잎전</li><li>김치찌개</li>
+                        </ul>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2026 SSAFY Java Class. Created by 이송하. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="js/script.js"></script>
+</body>
+</html>
